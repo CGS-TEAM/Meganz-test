@@ -298,7 +298,7 @@ async def mega_dl(bot, update):
     else:
         await bot.send_message(
             chat_id=update.chat.id,
-            text=f"""<b>I am a mega.nz link downloader bot! 😑</b>\n\nThis not a mega.nz link. 😡""",
+            text = 
             reply_to_message_id=update.message_id
         )
         return
