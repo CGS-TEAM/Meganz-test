@@ -1,5 +1,5 @@
 import os
-from sample_config import MONGODB_URI, BOT_USERNAME
+from sample_config import Config as config
 from database.database import Database
 
-db = Database(MONGODB_URI, BOT_USERNAME)
+db = Database(config.MONGODB_URI, config.BOT_USERNAME)
