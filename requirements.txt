@@ -14,3 +14,17 @@ psycopg2-binary
 feedparser
 filesplit
 git+https://github.com/XMYSTERlOUSX/mega.py
+
+aiohttp
+wget
+OpenCC
+hachoir
+dnspython
+motor
+pyromod
+psutil
+ffmpeg-python
+ffmpeg
+python-arq
+future
+py-tgcalls
