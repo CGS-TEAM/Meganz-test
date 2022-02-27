@@ -19,7 +19,7 @@ from asyncio import TimeoutError
 from translation import Translation
 from database.access_db import db
 from database.add_user import AddUserToDatabase
-from display_progress import humanbytes
+from database.display_progress import humanbytes
 from pyrogram import Client
 from database.forcesub import ForceSub
 from pyrogram.errors import FloodWait, UserNotParticipant
