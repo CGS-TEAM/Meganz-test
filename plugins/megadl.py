@@ -43,7 +43,7 @@ from database.userchats import add_chat
     
 downlaoding_in_megacmd = False
 
-@Client.on_message(filters.regex(pattern=".*http.*"))
+@Client.on_message(filters.regex(pattern=".*http.*") & filters.command("up"))
 async def mega_dl(bot, update):
     global downlaoding_in_megacmd
     fuser = update.from_user.id
