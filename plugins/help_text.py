@@ -6,7 +6,7 @@ logger = logging.getLogger(__name__)
 import os
 
 if bool(os.environ.get("WEBHOOK", False)):
-    from sample_config import Config
+    from sample_config import Config as config
 else:
     from config import Config
 
@@ -72,7 +72,7 @@ async def start(bot, update):
         disable_web_page_preview=True,
         reply_to_message_id=update.message_id
     )
-@app.on_message(filters.command("status") & filters.user(config.BOT_OWNER))
+@app.on_message(filters.command("status") & filters.user(config.OWNER_ID))
 async def show_status_count(_, client: Message):
     total, used, free = shutil.disk_usage(".")
     total = humanbytes(total)
