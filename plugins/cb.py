@@ -1,6 +1,6 @@
 import os
 from translation import Translation
-from pyrogram import Client
+from pyrogram import Client as app
 from pyrogram.errors import UserNotParticipant
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
