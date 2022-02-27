@@ -24,7 +24,7 @@ async def cb_data(client, message):
     elif message.data == "help":
         await message.message.edit_text(
             text=Translation.HELP_USER.format(message.from_user.mention),
-            reply_markup=exe.btns,
+            reply_markup=Translation.btns,
             disable_web_page_preview=True
         )
     elif message.data == "refreshme":
