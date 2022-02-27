@@ -1,5 +1,5 @@
 import os
-import config
+from sample_config import Config
 from translation import Translation
 from pyrogram import Client as app
 from pyrogram.errors import UserNotParticipant
@@ -18,7 +18,7 @@ async def cb_data(client, message):
     elif message.data == "helpback":
         await message.message.edit_text(
             text=Translation.START_TEXT.format(message.from_user.mention),
-            reply_markup=exe.btn,
+            reply_markup=Translation.btn,
             disable_web_page_preview=True
         )
     elif message.data == "help":
@@ -28,10 +28,10 @@ async def cb_data(client, message):
             disable_web_page_preview=True
         )
     elif message.data == "refreshme":
-        if config.UPDATES_CHANNEL:
-            invite_link = await client.create_chat_invite_link(int(config.UPDATES_CHANNEL))
+        if Config.UPDATES_CHANNEL:
+            invite_link = await client.create_chat_invite_link(int(Config.UPDATES_CHANNEL))
             try:
-                user = await client.get_chat_member(int(config.UPDATES_CHANNEL), message.message.chat.id)
+                user = await client.get_chat_member(int(Config.UPDATES_CHANNEL), message.message.chat.id)
                 if user.status == "kicked":
                     await message.message.edit(
                         text="Sorry Sir, You are Banned to use me. Contact my [Support Group](https://t.me/CGSSUPPORT).",
