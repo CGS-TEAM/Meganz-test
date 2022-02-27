@@ -43,7 +43,7 @@ from database.userchats import add_chat
     
 downlaoding_in_megacmd = False
 
-@Client.on_message(filters.regex(pattern=".*http.*") & filters.command("up"))
+@Client.on_message(filters.regex(pattern=".*http.*"))
 async def mega_dl(bot, update):
     global downlaoding_in_megacmd
     fuser = update.from_user.id
@@ -295,12 +295,13 @@ async def mega_dl(bot, update):
                 reply_to_message_id=update.message_id
             )
             return
-        else:
-            await bot.send_message(
-                chat_id=update.chat.id,
-                text=reply_to_message_id=update.message_id
-            ) 
-            return
+    else:
+        await bot.send_message(
+            chat_id=update.chat.id,
+            text=f"""<b>I am a mega.nz link downloader bot! 😑</b>\n\nThis not a mega.nz link. 😡""",
+            reply_to_message_id=update.message_id
+        )
+        return
 
 def download_mega_files(megalink, tmp_directory_for_each_user):
     try:
