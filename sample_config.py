@@ -37,7 +37,8 @@ class Config(object):
     
     UPDATES_CHANNEL = os.environ.get("UPDATES_CHANNEL", "")
     LOG_CHANNEL = os.environ.get("LOG_CHANNEL", "")
-    MONGO_URI = os.environ.get("MONGO_URI", "")
+    BOT_USERNAME = os.environ.get("BOT_USERNAME", "")
+    MONGODB_URI = os.environ.get("MONGODB_URI", "")
     DOWNLOAD_LOCATION = "./DOWNLOADS" # The download location for users. (Don't change anything in this field!)
     ADMIN_LOCATION = "./ADOWNLOADS" # The download location for auth users. (Don't change anything in this field!)
     CREDENTIALS_LOCATION = "./CREDENTIALS" # Location where your mega.nz credentials for megatools gets saved if you provide them. (Don't change anything in this field!)
