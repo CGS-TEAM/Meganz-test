@@ -73,7 +73,7 @@ async def start(bot, update):
         reply_to_message_id=update.message_id
     )
 @app.on_message(filters.command("status") & filters.user(config.OWNER_ID))
-async def show_status_count(_, client, Message:):
+async def show_status_count(_, client, Message):
     total, used, free = shutil.disk_usage(".")
     total = humanbytes(total)
     used = humanbytes(used)
