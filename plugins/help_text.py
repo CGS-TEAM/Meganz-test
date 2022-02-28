@@ -65,7 +65,7 @@ async def start(client, message):
         reply_markup=Translation.btns
     )
     
-@app.on_message(filters.private & filters.command("status") & filters.user(config.BOT_OWNER))
+@app.on_message(filters.private & filters.command("status") & filters.user(config.OWNER_ID))
 async def show_status_count(_, client: Message):
     total, used, free = shutil.disk_usage(".")
     total = humanbytes(total)
