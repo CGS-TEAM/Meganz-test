@@ -35,7 +35,7 @@ from pyrogram import Client as app
 from database.fsub import ForceSub
 from pyrogram.errors import FloodWait, UserNotParticipant
 from pyrogram.types.bots_and_keyboards import reply_keyboard_markup
-from pyrogram import idle, filters, Message
+from pyrogram import idle, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 CGSIMG = "https://telegra.ph/file/7a3ee0b1803ed6e6fbc87.jpg"
