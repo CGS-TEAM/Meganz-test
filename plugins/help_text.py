@@ -31,13 +31,13 @@ from database.blacklist import check_blacklist
 from database.userchats import add_chat
 
 from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
 
 @Client.on_message(filters.command("help"))
 async def help_user(bot, update):
-    await AddUserToDatabase(client, message)
-    FSub = await ForceSub(client, message)
+    await AddUserToDatabase(bot, update)
+    FSub = await ForceSub(bot, update)
     if FSub == 400:
         return
     fuser = update.from_user.id
@@ -56,8 +56,8 @@ async def help_user(bot, update):
 
 @Client.on_message(filters.command("start"))
 async def start(bot, update):
-    await AddUserToDatabase(client, message)
-    FSub = await ForceSub(client, message)
+    await AddUserToDatabase(bot, update)
+    FSub = await ForceSub(bot, update)
     if FSub == 400:
         return
     fuser = update.from_user.id
@@ -73,7 +73,7 @@ async def start(bot, update):
         reply_to_message_id=update.message_id
     )
 @app.on_message(filters.command("status") & filters.user(config.OWNER_ID))
-async def show_status_count(_, bot: update):
+async def show_status_count(_, client, Message:):
     total, used, free = shutil.disk_usage(".")
     total = humanbytes(total)
     used = humanbytes(used)
@@ -82,6 +82,6 @@ async def show_status_count(_, bot: update):
     ram_usage = psutil.virtual_memory().percent
     disk_usage = psutil.disk_usage('/').percent
     total_users = await db.total_users_count()
-    await update.reply_text(
+    await client.reply_text(
         text=f"**Total Disk Space:** {total} \n**Used Space:** {used}({disk_usage}%) \n**Free Space:** {free} \n**CPU Usage:** {cpu_usage}% \n**RAM Usage:** {ram_usage}%\n\n**Total Users in DB:** `{total_users}`\n\n@CGSMEGANZBOT,"
     )
