@@ -17,11 +17,8 @@ from database.blacklist import check_blacklist
 from database.userchats import add_chat
 
 from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
-
-
-# Leo Projects <https://t.me/leosupportx>
-# @Naviya2 🇱🇰
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.types import Message
 
 import os
 import time
@@ -39,7 +36,7 @@ from database.fsub import ForceSub
 from pyrogram.errors import FloodWait, UserNotParticipant
 from pyrogram.types.bots_and_keyboards import reply_keyboard_markup
 from pyrogram import idle, filters, Message
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 CGSIMG = "https://telegra.ph/file/7a3ee0b1803ed6e6fbc87.jpg"
 
