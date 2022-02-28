@@ -20,7 +20,7 @@ from translation import Translation
 from database.access_db import db
 from database.add_user import AddUserToDatabase
 from database.display_progress import humanbytes
-from pyrogram import Client
+from pyrogram import Client as app
 from database.fsub import ForceSub
 from pyrogram.errors import FloodWait, UserNotParticipant
 
