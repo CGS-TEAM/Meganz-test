@@ -29,14 +29,13 @@ import psutil
 import shutil
 import string
 import asyncio
-import config
 from asyncio import TimeoutError
-from LeoSongDownloaderBot.translation import Translation
-from helper.database.access_db import db
-from helper.database.add_user import AddUserToDatabase
-from helper.display_progress import humanbytes
+from translation import Translation
+from database.access_db import db
+from database.add_user import AddUserToDatabase
+from database.display_progress import humanbytes
 from pyrogram import Client as app
-from helper.forcesub import ForceSub
+from database.fsub import ForceSub
 from pyrogram.errors import FloodWait, UserNotParticipant
 from pyrogram.types.bots_and_keyboards import reply_keyboard_markup
 from pyrogram import idle, filters, Message
