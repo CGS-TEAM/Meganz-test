@@ -51,7 +51,7 @@ async def mega_dl(bot, update):
         await update.reply_text("Sorry! You are Banned!")
         return
     add_chat(fuser)
-    url = update.text
+    url = update.text.split(None, 1)[1]
     if "mega.nz" in url:
         if ("folder" or "#F" or "#N") not in url:
             usermsg = await bot.send_message(
