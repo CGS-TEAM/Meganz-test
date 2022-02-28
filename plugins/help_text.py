@@ -10,20 +10,6 @@ if bool(os.environ.get("WEBHOOK", False)):
 else:
     from config import Config
 
-import time
-import psutil
-import shutil
-import string
-import asyncio
-from asyncio import TimeoutError
-from translation import Translation
-from database.access_db import db
-from database.add_user import AddUserToDatabase
-from database.display_progress import humanbytes
-from pyrogram import Client as app
-from database.fsub import ForceSub
-from pyrogram.errors import FloodWait, UserNotParticipant
-
 import pyrogram
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
@@ -34,46 +20,57 @@ from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
 
-@Client.on_message(filters.command("help"))
-async def help_user(bot, update):
-    await AddUserToDatabase(bot, update)
-    FSub = await ForceSub(bot, update)
-    if FSub == 400:
-        return
-    fuser = update.from_user.id
-    if check_blacklist(fuser):
-        await update.reply_text("Sorry! You are Banned!")
-        return
-    add_chat(fuser)
-    await bot.send_message(
-        chat_id=update.chat.id,
-        text=Translation.HELP_USER,
-        parse_mode="html",
-        reply_markup=Translation.btns,
-        disable_web_page_preview=True,
-        reply_to_message_id=update.message_id
-    )
+# Leo Projects <https://t.me/leosupportx>
+# @Naviya2 🇱🇰
 
-@Client.on_message(filters.command("start"))
-async def start(bot, update):
-    await AddUserToDatabase(bot, update)
-    FSub = await ForceSub(bot, update)
+import os
+import time
+import psutil
+import shutil
+import string
+import asyncio
+import config
+from asyncio import TimeoutError
+from LeoSongDownloaderBot.translation import Translation
+from helper.database.access_db import db
+from helper.database.add_user import AddUserToDatabase
+from helper.display_progress import humanbytes
+from pyrogram import Client as app
+from helper.forcesub import ForceSub
+from pyrogram.errors import FloodWait, UserNotParticipant
+from pyrogram.types.bots_and_keyboards import reply_keyboard_markup
+from pyrogram import idle, filters, Message
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
+
+CGSIMG = "https://telegra.ph/file/7a3ee0b1803ed6e6fbc87.jpg"
+
+@app.on_message(filters.command("start"))
+async def start(client, message):
+    await AddUserToDatabase(client, message)
+    FSub = await ForceSub(client, message)
     if FSub == 400:
         return
-    fuser = update.from_user.id
-    if check_blacklist(fuser):
-        await update.reply_text("Sorry! You are Banned!")
-        return
-    add_chat(fuser)
-    await bot.send_message(
-        chat_id=update.chat.id,
-        text=Translation.START_TEXT,
-        reply_markup=Translation.btn,
-        disable_web_page_preview=True,
-        reply_to_message_id=update.message_id
+    await message.reply_photo(
+        CGSIMG,
+        caption=Translation.START_TEXT.format(message.from_user.mention),
+        reply_markup=Translation.btn
     )
-@app.on_message(filters.command("status") & filters.user(config.OWNER_ID))
-async def show_status_count(_, client, Message):
+   
+
+@app.on_message(filters.command("help"))
+async def start(client, message):
+    await AddUserToDatabase(client, message)
+    FSub = await ForceSub(client, message)
+    if FSub == 400:
+        return
+    await message.reply_photo(
+        CGSIMG,
+        caption=Translation.HELP_USER.format(message.from_user.mention),
+        reply_markup=Translation.btns
+    )
+    
+@app.on_message(filters.private & filters.command("status") & filters.user(config.BOT_OWNER))
+async def show_status_count(_, client: Message):
     total, used, free = shutil.disk_usage(".")
     total = humanbytes(total)
     used = humanbytes(used)
@@ -83,5 +80,7 @@ async def show_status_count(_, client, Message):
     disk_usage = psutil.disk_usage('/').percent
     total_users = await db.total_users_count()
     await client.reply_text(
-        text=f"**Total Disk Space:** {total} \n**Used Space:** {used}({disk_usage}%) \n**Free Space:** {free} \n**CPU Usage:** {cpu_usage}% \n**RAM Usage:** {ram_usage}%\n\n**Total Users in DB:** `{total_users}`\n\n@CGSMEGANZBOT,"
+        text=f"**Total Disk Space:** {total} \n**Used Space:** {used}({disk_usage}%) \n**Free Space:** {free} \n**CPU Usage:** {cpu_usage}% \n**RAM Usage:** {ram_usage}%\n\n**Total Users in DB:** `{total_users}`\n\n@leosongdownloaderbot 🇱🇰",
+        parse_mode="Markdown",
+        quote=True
     )
