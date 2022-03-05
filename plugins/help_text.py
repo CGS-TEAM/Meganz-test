@@ -45,9 +45,10 @@ async def help_user(bot, update):
         await update.reply_text("Sorry! You are Banned!")
         return
     add_chat(fuser)
-    await bot.send_message(
+    await update.reply_photo(
+        photo=https://telegra.ph/file/9d5386403fcab2bb0ec95.jpg
         chat_id=update.chat.id,
-        text=Translation.HELP_USER,
+        caption=Translation.HELP_USER,
         parse_mode="html",
         reply_markup=Translation.btns,
         disable_web_page_preview=True,
@@ -65,9 +66,10 @@ async def start(bot, update):
         await update.reply_text("Sorry! You are Banned!")
         return
     add_chat(fuser)
-    await bot.send_message(
+    await update.reply_photo(
+        photo=https://telegra.ph/file/9d5386403fcab2bb0ec95.jpg
         chat_id=update.chat.id,
-        text=Translation.START_TEXT,
+        caption=Translation.START_TEXT,
         reply_markup=Translation.btn,
         disable_web_page_preview=True,
         reply_to_message_id=update.message_id
