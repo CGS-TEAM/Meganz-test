@@ -52,7 +52,6 @@ async def cb_data(client, message):
                             ]
                         ]
                     ),
-                    parse_mode="HTML"
                 )
                 return
             except Exception:
