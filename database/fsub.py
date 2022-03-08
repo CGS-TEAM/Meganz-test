@@ -35,7 +35,7 @@ async def ForceSub(bot: Client, event: Message):
             text=""" 
             ** {} NOT JOINED UPDATE CHANNEL **☹️
 
-🪴[Join update channel](https://t.me/CGSUPDATES) to click button below☘ Then try again.🍃
+🪴[Join update channel](https://t.me/CGSUPDATES) to click button below or press /start ☘ Then try again.🍃
 
 
 **@CGSUPDATES**🌺
