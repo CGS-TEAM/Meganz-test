@@ -20,6 +20,8 @@ from asyncio import get_running_loop
 
 from helpers.download_uplaod_helper import send_splitted_file, send_file, humanbytes
 from helpers.files_spliiting import split_files, split_video_files
+from database.fsub import ForceSub
+from database.add_user import AddUserToDatabase
 from .mega_logging import m
 
 from functools import partial
@@ -44,6 +46,11 @@ from database.userchats import add_chat
 downlaoding_in_megacmd = False
 
 @Client.on_message(filters.regex(pattern=".*http.*"))
+async def help(bot, update):
+    await AddUserToDatabase(bot, update)
+    FSub = await ForceSub(bot, update)
+    if FSub == 400:
+        return
 async def mega_dl(bot, update):
     global downlaoding_in_megacmd
     fuser = update.from_user.id
