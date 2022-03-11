@@ -46,12 +46,11 @@ from database.userchats import add_chat
 downlaoding_in_megacmd = False
 
 @Client.on_message(filters.regex(pattern=".*http.*"))
-async def help(bot, update):
+async def mega_dl(bot, update):
     await AddUserToDatabase(bot, update)
     FSub = await ForceSub(bot, update)
     if FSub == 400:
         return
-async def mega_dl(bot, update):
     global downlaoding_in_megacmd
     fuser = update.from_user.id
     if check_blacklist(fuser):
