@@ -33,6 +33,9 @@ from database.userchats import add_chat
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
+KK_MSG = """
+SOURCE - `https://github.com/XMYSTERlOUSX/mega-link-downloader-bot`
+"""
 
 @Client.on_message(filters.command("help"))
 async def help_user(bot, update):
@@ -48,6 +51,26 @@ async def help_user(bot, update):
     await bot.send_message(
         chat_id=update.chat.id,
         text=Translation.HELP_USER,
+        parse_mode="html",
+        reply_markup=Translation.btns,
+        disable_web_page_preview=True,
+        reply_to_message_id=update.message_id
+    )
+
+@Client.on_message(filters.command("about"))
+async def help_user(bot, update):
+    await AddUserToDatabase(bot, update)
+    FSub = await ForceSub(bot, update)
+    if FSub == 400:
+        return
+    fuser = update.from_user.id
+    if check_blacklist(fuser):
+        await update.reply_text("Sorry! You are Banned!")
+        return
+    add_chat(fuser)
+    await bot.send_message(
+        chat_id=update.chat.id,
+        text=KK_MSG,
         parse_mode="html",
         reply_markup=Translation.btns,
         disable_web_page_preview=True,
