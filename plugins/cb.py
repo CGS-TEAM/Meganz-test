@@ -41,15 +41,12 @@ async def cb_data(client, message):
                     return
             except UserNotParticipant:
                 await message.message.edit(
-                    text="<b>Hey</b> {},\n\n<b>You still didn't join our Updates Channel ☹️ \nPlease Join and hit on the 'Refresh 🔄' Button</b>".format(message.from_user.mention),
+                    text="<b>Hey</b> {},\n\n<b>You still didn't join our Updates Channel ☹️ \nPlease Join and press on /start command ✨</b>".format(message.from_user.mention),
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
                                 InlineKeyboardButton("Join Our Updates Channel 🗣", url=invite_link.invite_link)
                             ],
-                            [
-                                InlineKeyboardButton("Refresh 🔄", callback_data="refreshme")
-                            ]
                         ]
                     ),
                 )
