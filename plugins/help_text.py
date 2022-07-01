@@ -50,7 +50,6 @@ async def help_user(bot, update):
         parse_mode="html",
         reply_markup=Translation.btns,
         disable_web_page_preview=True,
-        reply_to_message_id=update.message_id
     )
 
 @Client.on_message(filters.command("about"))
@@ -69,7 +68,6 @@ async def help_user(bot, update):
         parse_mode="html",
         reply_markup=Translation.btns,
         disable_web_page_preview=True,
-        reply_to_message_id=update.message_id
     )
 
 @Client.on_message(filters.command("start"))
