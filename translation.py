@@ -72,3 +72,9 @@ Ex:- <a href="https://telegra.ph/file/bdc35efc07712050bc418.jpg">Send Like This!
         InlineKeyboardButton(text="Back 🍀", callback_data="helpback")
         ]]    
     )
+    btna = InlineKeyboardMarkup( 
+        [[
+        InlineKeyboardButton(text="JOIN UPDATES CHANNEL ⚡, url="https:/t.me/CGSUpdates")
+        ]]    
+    )
+
