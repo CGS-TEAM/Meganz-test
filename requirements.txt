@@ -13,7 +13,6 @@ redis
 psycopg2-binary
 feedparser
 filesplit
-fsplit
 git+https://github.com/XMYSTERlOUSX/mega.py
 
 aiohttp
