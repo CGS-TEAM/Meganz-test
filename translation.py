@@ -74,7 +74,7 @@ Ex:- <a href="https://telegra.ph/file/bdc35efc07712050bc418.jpg">Send Like This!
     )
     btna = InlineKeyboardMarkup( 
         [[
-        InlineKeyboardButton(text="JOIN UPDATES CHANNEL ⚡, url="https:/t.me/CGSUpdates")
+        InlineKeyboardButton(text="JOIN UPDATES CHANNEL ⚡", url="https:/t.me/CGSUpdates")
         ]]    
     )
 
