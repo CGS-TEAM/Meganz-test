@@ -57,7 +57,6 @@ async def mega_dl(bot, update):
             usermsg = await bot.send_message(
                 chat_id=update.chat.id,
                 text=f"""<b>Processing...⏳</b>""",
-                reply_to_message_id=update.message_id
             )
             description = ""
             megalink = None
