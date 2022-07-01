@@ -111,6 +111,7 @@ async def mega_dl(bot, update):
                     await bot.edit_message_text(
                         chat_id=update.chat.id,
                         text="<b>Files detected</b> : " + fname + "\n" + "<b>Size</b> : " + humanbytes(the_file_size) + "\n" + "\n" + Translation.DOWNLOAD_START,
+                        disable_web_page_preview=True,
                     )
                     megalink = url
                     if megalink is not None:
@@ -268,6 +269,7 @@ async def mega_dl(bot, update):
                     await bot.edit_message_text(
                         text="Error: "+ str(e),
                         chat_id=update.chat.id,
+                        disable_web_page_preview=True,
                     )
                     try:
                         shutil.rmtree(tmp_directory_for_each_user)
