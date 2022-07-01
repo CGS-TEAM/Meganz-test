@@ -9,7 +9,7 @@ from hachoir.parser import createParser
 from hachoir.metadata import extractMetadata
 import math
 
-from fsplit.filesplit import Filesplit
+from filesplit import Filesplit
 
 if bool(os.environ.get("WEBHOOK", False)):
     from sample_config import Config
