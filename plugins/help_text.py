@@ -87,7 +87,6 @@ async def start(bot, update):
         text=Translation.START_TEXT,
         reply_markup=Translation.btn,
         disable_web_page_preview=True,
-        reply_to_message_id=update.message_id
     )
 @Client.on_message(filters.command("status") & filters.user(config.OWNER_ID))
 async def show_status_count(_, client, Message):
