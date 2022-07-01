@@ -279,7 +279,6 @@ async def mega_dl(bot, update):
                     await bot.edit_message_text(
                         text="Error: "+ str(e),
                         chat_id=update.chat.id,
-                        message_id=usermsg.message_id
                     )
                     try:
                         shutil.rmtree(tmp_directory_for_each_user)
