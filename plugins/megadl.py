@@ -21,7 +21,6 @@ from asyncio import get_running_loop
 from helpers.download_uplaod_helper import send_splitted_file, send_file, humanbytes
 from helpers.files_spliiting import split_files, split_video_files
 from database.fsub import ForceSub
-from database.add_user import AddUserToDatabase
 from .mega_logging import m
 
 from functools import partial
