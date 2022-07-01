@@ -20,7 +20,6 @@ from asyncio import get_running_loop
 
 from helpers.download_uplaod_helper import send_splitted_file, send_file, humanbytes
 from helpers.files_spliiting import split_files, split_video_files
-from database.fsub import ForceSub
 from .mega_logging import m
 
 from functools import partial
@@ -58,6 +57,7 @@ async def mega_dl(bot, update):
             usermsg = await bot.send_message(
                 chat_id=update.chat.id,
                 text=f"""<b>Processing...⏳</b>""",
+                reply_to_message_id=update.message_id
             )
             description = ""
             megalink = None
@@ -103,6 +103,7 @@ async def mega_dl(bot, update):
                 await bot.edit_message_text(
                     chat_id=update.chat.id,
                     text="Error: "+ str(e) + "\n\n" + error_text,
+                    message_id=usermsg.message_id
                 )
                 return
             if a == 1:
@@ -112,6 +113,7 @@ async def mega_dl(bot, update):
                     await bot.edit_message_text(
                         chat_id=update.chat.id,
                         text="<b>Files detected</b> : " + fname + "\n" + "<b>Size</b> : " + humanbytes(the_file_size) + "\n" + "\n" + Translation.DOWNLOAD_START,
+                        message_id=usermsg.message_id
                     )
                     megalink = url
                     if megalink is not None:
@@ -147,6 +149,7 @@ async def mega_dl(bot, update):
                                 await bot.edit_message_text(
                                     text="Error: "+ str(e),
                                     chat_id=update.chat.id,
+                                    message_id=usermsg.message_id
                                 )
                                 shutil.rmtree(tmp_directory_for_each_user)
                                 return
@@ -168,6 +171,7 @@ async def mega_dl(bot, update):
                                 await bot.edit_message_text(
                                     text="Error: "+ str(e),
                                     chat_id=update.chat.id,
+                                    message_id=usermsg.message_id
                                 )
                                 shutil.rmtree(tmp_directory_for_each_user)
                                 return
@@ -183,6 +187,7 @@ async def mega_dl(bot, update):
                                 await bot.edit_message_text(
                                     chat_id=update.chat.id,
                                     text="<b>Detected Size</b> : " + humanbytes(file_size) + "\n" + "\n" + "<i>Splitting files...</i>\n\n<code>The downloaded file is bigger than 2GB! But due to telegram API limits I can't upload files which are bigger than 2GB 🥺. So I will split the files and upload them to you. 😇</code>",
+                                    message_id=usermsg.message_id
                                 )
                                 splitting_size = 2040108421
                                 if not os.path.exists(splitted_files_directory):
@@ -206,16 +211,15 @@ async def mega_dl(bot, update):
                                             await bot.edit_message_text(
                                                 chat_id=update.chat.id,
                                                 text=Translation.UPLOAD_START,
-                                                reply_markup=Translation.btna,
-                                                disable_web_page_preview=True,
+                                                message_id=usermsg.message_id
                                             )
                                             await send_splitted_file(bot, update, tg_send_type, thumb_image_path, splited_file, tmp_directory_for_each_user, description, usermsg)
                                     end_two = datetime.now()
                                     time_taken_for_upload = (end_two - end_one).seconds
                                     await bot.edit_message_text(
                                         text=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG_WITH_TS.format(time_taken_for_download, time_taken_for_upload),
-                                        reply_markup=Translation.btna,
                                         chat_id=update.chat.id,
+                                        message_id=usermsg.message_id,
                                         disable_web_page_preview=True
                                     )
                                     try:
@@ -228,7 +232,7 @@ async def mega_dl(bot, update):
                                 await bot.edit_message_text(
                                     text="Error: "+ str(e),
                                     chat_id=update.chat.id,
-  
+                                    message_id=usermsg.message_id
                                 )
                                 try:
                                     shutil.rmtree(tmp_directory_for_each_user)
@@ -241,16 +245,15 @@ async def mega_dl(bot, update):
                                 await bot.edit_message_text(
                                     chat_id=update.chat.id,
                                     text=Translation.UPLOAD_START,
-                                    reply_markup=Translation.btna,
-                                    disable_web_page_preview=True,
+                                    message_id=usermsg.message_id
                                 )
                                 await send_file(bot, update, tg_send_type, thumb_image_path, download_directory, tmp_directory_for_each_user, description, usermsg)
                                 end_two = datetime.now()
                                 time_taken_for_upload = (end_two - end_one).seconds
                                 await bot.edit_message_text(
                                     text=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG_WITH_TS.format(time_taken_for_download, time_taken_for_upload),
-                                    reply_markup=Translation.btna,
                                     chat_id=update.chat.id,
+                                    message_id=usermsg.message_id,
                                     disable_web_page_preview=True
                                 )
                                 try:
@@ -264,6 +267,7 @@ async def mega_dl(bot, update):
                                 await bot.edit_message_text(
                                     text="Error: "+ str(e),
                                     chat_id=update.chat.id,
+                                    message_id=usermsg.message_id
                                 )
                                 try:
                                     shutil.rmtree(tmp_directory_for_each_user)
@@ -276,6 +280,7 @@ async def mega_dl(bot, update):
                     await bot.edit_message_text(
                         text="Error: "+ str(e),
                         chat_id=update.chat.id,
+                        message_id=usermsg.message_id
                     )
                     try:
                         shutil.rmtree(tmp_directory_for_each_user)
@@ -294,6 +299,7 @@ async def mega_dl(bot, update):
         await bot.send_message(
             chat_id=update.chat.id,
             text=f"""<b>I am a mega.nz link downloader bot! 😑</b>\n\nThis not a mega.nz link. 😡""",
+            reply_to_message_id=update.message_id
         )
         return
 
@@ -312,7 +318,7 @@ def download_mega_docs(megalink, tmp_directory_for_each_user, cred_location, upd
                 process = subprocess.run(["megadl", megalink, "--path", tmp_directory_for_each_user, "--config", cred_location]) # If mega.nz credentials are provided your link will be downloaded from megatools using quota in your account!. Helps to avoid quota limits if you use a pro/business mega account!
             except Exception as e:
                 logger.info(e)
-                update.reply_text(f"Error : `{e}` occured!\n\n<b>.Maybe because there is some error in your `mega.ini` file! Please send your file, exatly as mentioned in the readme 👉 https://github.com/XMYSTERlOUSX/mega-link-downloader-bot/blob/main/README.md</b>\n\n<i>Downloading your file now without logging in to your account...</i>", disable_web_page_preview=True)
+                update.reply_text(f"Error : `{e}` occured!\n\n<b>.Maybe because there is some error in your `mega.ini` file! Please send your file, exatly as mentioned\n\n<i>Downloading your file now without logging in to your account...</i>", disable_web_page_preview=True)
                 process = subprocess.run(["megadl", megalink, "--path", tmp_directory_for_each_user])
         else:
             process = subprocess.run(["megadl", megalink, "--path", tmp_directory_for_each_user])
