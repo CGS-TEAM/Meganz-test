@@ -211,6 +211,8 @@ async def mega_dl(bot, update):
                                             await bot.edit_message_text(
                                                 chat_id=update.chat.id,
                                                 text=Translation.UPLOAD_START,
+                                                reply_markup=Translation.btna,
+                                                disable_web_page_preview=True,
                                                 message_id=usermsg.message_id
                                             )
                                             await send_splitted_file(bot, update, tg_send_type, thumb_image_path, splited_file, tmp_directory_for_each_user, description, usermsg)
@@ -218,6 +220,7 @@ async def mega_dl(bot, update):
                                     time_taken_for_upload = (end_two - end_one).seconds
                                     await bot.edit_message_text(
                                         text=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG_WITH_TS.format(time_taken_for_download, time_taken_for_upload),
+                                        reply_markup=Translation.btna,
                                         chat_id=update.chat.id,
                                         message_id=usermsg.message_id,
                                         disable_web_page_preview=True
@@ -245,6 +248,8 @@ async def mega_dl(bot, update):
                                 await bot.edit_message_text(
                                     chat_id=update.chat.id,
                                     text=Translation.UPLOAD_START,
+                                    reply_markup=Translation.btna,
+                                    disable_web_page_preview=True,
                                     message_id=usermsg.message_id
                                 )
                                 await send_file(bot, update, tg_send_type, thumb_image_path, download_directory, tmp_directory_for_each_user, description, usermsg)
@@ -252,6 +257,7 @@ async def mega_dl(bot, update):
                                 time_taken_for_upload = (end_two - end_one).seconds
                                 await bot.edit_message_text(
                                     text=Translation.AFTER_SUCCESSFUL_UPLOAD_MSG_WITH_TS.format(time_taken_for_download, time_taken_for_upload),
+                                    reply_markup=Translation.btna,
                                     chat_id=update.chat.id,
                                     message_id=usermsg.message_id,
                                     disable_web_page_preview=True
