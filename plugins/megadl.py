@@ -47,10 +47,6 @@ downlaoding_in_megacmd = False
 
 @Client.on_message(filters.regex(pattern=".*http.*"))
 async def mega_dl(bot, update):
-    await AddUserToDatabase(bot, update)
-    FSub = await ForceSub(bot, update)
-    if FSub == 400:
-        return
     global downlaoding_in_megacmd
     fuser = update.from_user.id
     if check_blacklist(fuser):
