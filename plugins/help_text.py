@@ -17,9 +17,6 @@ import string
 import asyncio
 from asyncio import TimeoutError
 from translation import Translation
-from database.access_db import db
-from database.add_user import AddUserToDatabase
-from database.display_progress import humanbytes
 from pyrogram import Client as app
 from database.fsub import ForceSub
 from pyrogram.errors import FloodWait, UserNotParticipant
@@ -39,7 +36,6 @@ SOURCE - `https://github.com/XMYSTERlOUSX/mega-link-downloader-bot`
 
 @Client.on_message(filters.command("help"))
 async def help_user(bot, update):
-    await AddUserToDatabase(bot, update)
     FSub = await ForceSub(bot, update)
     if FSub == 400:
         return
@@ -59,7 +55,6 @@ async def help_user(bot, update):
 
 @Client.on_message(filters.command("about"))
 async def help_user(bot, update):
-    await AddUserToDatabase(bot, update)
     FSub = await ForceSub(bot, update)
     if FSub == 400:
         return
@@ -79,7 +74,6 @@ async def help_user(bot, update):
 
 @Client.on_message(filters.command("start"))
 async def start(bot, update):
-    await AddUserToDatabase(bot, update)
     FSub = await ForceSub(bot, update)
     if FSub == 400:
         return
